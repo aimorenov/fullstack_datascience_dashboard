@@ -1,0 +1,4 @@
+virtenv/
+*virtenv
+.DS_store
+*.pyc
