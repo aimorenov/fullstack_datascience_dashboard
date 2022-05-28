@@ -73,17 +73,17 @@ if st.checkbox('Show my processing of the original data'):
 
 # --- Figure 1 --- Total number of rentals being late 
 
-st.subheader("Number of total rental checkins that are late")
+st.subheader("Number of total rental checkouts that are late")
 
 # Optional counts table to display
-dfg = df.groupby(['checkin_late']).size().reset_index(name='counts')
+dfg = df.groupby(['checkout_late']).size().reset_index(name='counts')
 dfg['proportion_of_total_rentals'] = dfg.counts / sum(dfg.counts)
 
 total_rentals = sum(dfg.counts)
 
 # Plot 
-fig1 = px.bar(dfg, x="checkin_late", y ='proportion_of_total_rentals', 
-title=" Fig1. Check-in late status of all rentals (n ={} rentals)".format(sum(dfg.counts)))
+fig1 = px.bar(dfg, x="checkout_late", y ='proportion_of_total_rentals', 
+title=" Fig1. Check-out late status of all rentals (n ={} rentals)".format(sum(dfg.counts)))
 
 st.plotly_chart(fig1, use_container_width=True)
 
@@ -95,25 +95,25 @@ st.markdown("""
 
 ## Show optional counts table if check is checked 
 if st.checkbox('Show counts table for Fig 1 rentals'):
-    st.subheader('Number of rental checkins that are late')
+    st.subheader('Number of rental checkouts that are late')
     st.write(dfg) 
 
 st.markdown("***")
 
 # --- Figure 2 --- Total number of rentals being late per checkin type
 
-st.subheader("Number of total rental checkins that are late per checkin type")
+st.subheader("Number of total rental checkouts that are late per checkin type")
 
 # Optional counts table to display
-dfg = df.groupby(['checkin_type','checkin_late']).size().reset_index(name='counts')
+dfg = df.groupby(['checkin_type','checkout_late']).size().reset_index(name='counts')
 
 
 tot_rentals_mobile = df.checkin_type.value_counts()['mobile']
 tot_rentals_connect = df.checkin_type.value_counts()['connect']
 
 # Plot 
-fig2 = px.histogram(df, x="checkin_type", barmode='group',barnorm='percent', color="checkin_late",color_discrete_sequence=px.colors.qualitative.D3,
-title="Fig2.Check-in late status of all rentals (n ={} mobile rentals; n = {} connect rentals)".format(tot_rentals_mobile, tot_rentals_connect))
+fig2 = px.histogram(df, x="checkin_type", barmode='group',barnorm='percent', color="checkout_late",color_discrete_sequence=px.colors.qualitative.D3,
+title="Fig2.Check-out late status of all rentals (n ={} mobile rentals; n = {} connect rentals)".format(tot_rentals_mobile, tot_rentals_connect))
 st.plotly_chart(fig2, use_container_width=True)
 
 st.markdown("""
@@ -125,7 +125,7 @@ st.markdown("""
 
 ## Show optional counts table if check is checked 
 if st.checkbox('Show counts table for Fig 2 rentals'):
-    st.subheader('Number of rental checkins that are late per checkin type')
+    st.subheader('Number of rental checkouts that are late per checkin type')
     st.write(dfg)
 
 st.markdown("***")
@@ -204,7 +204,7 @@ labels={'delay_at_checkout_in_minutes': 'Delay at chekout (mins)'})
 df_filt = df.copy()
 delay_hours = 4
 filter_mask = abs(df_filt['delay_at_checkout_in_minutes']) <= delay_hours*60
-filter_mask2 = df_filt['checkin_late'] == 'late'
+filter_mask2 = df_filt['checkout_late'] == 'late'
 df_filt = df_filt[filter_mask & filter_mask2]
 
 delay_quantile_late = df_filt['delay_at_checkout_in_minutes'].quantile((0,0.25,0.5,0.75,1))

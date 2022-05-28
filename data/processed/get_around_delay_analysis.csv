@@ -1,4 +1,4 @@
-rental_id,car_id,checkin_type,state,delay_at_checkout_in_minutes,previous_ended_rental_id,time_delta_with_previous_rental_in_minutes,checkin_late,previous_ended_rental_late,previous_ended_rental_checkout_delay,delta_checkin_previous_rental,delta_checkin_previous_rental_problematic_bool,succesive_rental
+rental_id,car_id,checkin_type,state,delay_at_checkout_in_minutes,previous_ended_rental_id,time_delta_with_previous_rental_in_minutes,checkout_late,previous_ended_rental_late,previous_ended_rental_checkout_delay,delta_checkin_previous_rental,delta_checkin_previous_rental_problematic_bool,succesive_rental
 505000.0,363965.0,mobile,canceled,,nan,,notapplicable,,,,no,no
 507750.0,269550.0,mobile,ended,-81.0,nan,,early,,,,no,no
 508131.0,359049.0,connect,ended,70.0,nan,,late,,,,no,no
